@@ -1,0 +1,6 @@
+geometry 3x5-0+0
+icon_size 21
+icon_gravity NE
+transparent true
+window_strut right
+window_type dock

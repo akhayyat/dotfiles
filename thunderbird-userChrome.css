@@ -1,0 +1,8 @@
+treechildren::-moz-tree-row {
+    min-height: 24px !important;
+}
+
+#threadTree >treechildren::-moz-tree-row {
+    min-height: 26px !important;
+    border-bottom: 1px solid #ccc !important;
+}

@@ -1,0 +1,14 @@
+ZSHROOT=$HOME/.dotfiles/zsh
+
+source $ZSHROOT/terminal.zsh
+source $ZSHROOT/history.zsh
+source $ZSHROOT/syntax-highlighting.zsh
+source $ZSHROOT/history-substring-search.zsh
+source $ZSHROOT/editor.zsh
+source $ZSHROOT/directory.zsh
+source $ZSHROOT/programs.zsh
+source $ZSHROOT/completion.zsh
+source $ZSHROOT/prompt.zsh
+source $ZSHROOT/agents.zsh
+
+unset ZSHROOT

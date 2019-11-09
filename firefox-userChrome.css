@@ -1,0 +1,6 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+/* hide the native tabs in favor of the Tree Style Tabs extension */
+#TabsToolbar {
+    visibility: collapse;
+}

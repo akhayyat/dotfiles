@@ -1,0 +1,126 @@
+#
+# Screenshot:
+#   http://i.imgur.com/jmOES.png
+#
+# Dependencies:
+#   git
+#   mercurial
+#   hg-prompt (https://bitbucket.org/sjl/hg-prompt)
+#
+
+function prompt_akhayyat_precmd {
+    vcs_info 'prompt'
+}
+
+function prompt_akhayyat_setup {
+    prompt_opts=(cr percent subst)
+
+    # Load required functions.
+    autoload -Uz add-zsh-hook
+    autoload -Uz vcs_info
+
+    # Use extended color pallete if available.
+    if [[ $TERM = *256color* || $TERM = *rxvt* ]]; then
+        orange="166"
+    else
+        orange="yellow"
+    fi
+
+    # Add hook for calling *-info before each command.
+    add-zsh-hook precmd prompt_akhayyat_precmd
+
+    # Set vcs_info parameters.
+    zstyle ':vcs_info:*' enable git
+    zstyle ':vcs_info:*:prompt:*' check-for-changes true
+    zstyle ':vcs_info:*:prompt:*' stagedstr "%F{green}●%f"
+    zstyle ':vcs_info:*:prompt:*' unstagedstr "%F{$orange}●%f"
+    zstyle ':vcs_info:*:prompt:*' formats " on ±%F{cyan}%r%f/%F{yellow}%b%f %c%u %m"
+    zstyle ':vcs_info:*:prompt:*' actionformats " on ±%F{cyan}%r%f/%F{yellow}%b%f in %a %c%u %m"
+    zstyle ':vcs_info:*:prompt:*' nvcsformats   ""
+    zstyle ':vcs_info:git*+set-message:*' hooks git-untracked git-st
+
+    # Define prompts.
+    PROMPT="
+%F{magenta}%n%f@%F{magenta}%m%f:%F{cyan}%~%f"'$(hg_prompt_1)${vcs_info_msg_0_}$(hg_prompt_2)$(virtualenv_prompt)$(rvm_prompt)
+» '
+
+    RPROMPT="%B%F{black}%D{%Y.%m.%d %a  %I:%M %P}%f%b"
+}
+
+function hg_prompt_1 {
+    hg prompt --angle-brackets "\
+ <on ☿<%F{cyan}<root|basename>%f/>%F{yellow}<branch>%f>\
+<:%F{$orange}<bookmark>%f>\
+ at %F{green}<rev>%f\
+<:%F{green}<tags>%f>\
+<%F{$orange}<status|modified>%f>\
+<%F{red}<status|unknown>%f>\
+<update>\
+< %F{yellow}↑%f:%F{yellow}<outgoing|count>%f>\
+< %F{$orange}↓%f:%F{$orange}<incoming|count>%f>" 2>/dev/null
+}
+
+function hg_prompt_2 {
+    mq=$(hg prompt --angle-brackets "<
+patches: <patches|join( → )|pre_applied(%F{$orange})|post_applied(%f)|\
+pre_unapplied(%B%F{black})|post_unapplied(%f%b)>>" 2>/dev/null)
+
+    if [ $mq ]; then
+        mq="$mq"$(hg prompt --mq --angle-brackets "\
+ <on %F{yellow}<branch>%f>\
+<:%F{$orange}<bookmark>%f>\
+ at %F{green}<rev>%f\
+<:%F{green}<tags>%f>\
+<%F{$orange}<status|modified>%f>\
+<%F{red}<status|unknown>%f>\
+<update>\
+< %F{yellow}↑%f<outgoing>>\
+< %F{$orange}↓%f<incoming>>" 2>/dev/null)
+    fi
+
+    echo $mq
+}
+
+function virtualenv_prompt {
+    if [ $VIRTUAL_ENV ]; then
+        echo ' ('`basename $VIRTUAL_ENV`')'
+    fi
+}
+
+function rvm_prompt {
+    if (( $+commands[rvm-prompt] )); then
+        rvm_version=$(rvm-prompt)
+        if [[ -n $rvm_version ]]; then
+            echo ' ('`rvm-prompt`')'
+        fi
+    fi
+}
+
+function +vi-git-untracked {
+    if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]] && \
+        git status --porcelain | grep '??' &> /dev/null ; then
+        hook_com[unstaged]+="%F{red}●%f"
+    fi
+}
+
+function +vi-git-st() {
+    local ahead behind ahead_and_behind
+    local -a gitstatus
+
+    ahead_and_behind=$(git rev-list --count --left-right HEAD...@{upstream} 2>/dev/null)
+    ahead=$ahead_and_behind[(w)1]
+    behind=$ahead_and_behind[(w)2]
+
+    (( $ahead )) && gitstatus+=( "%F{yellow}↑%f" )
+    (( $behind )) && gitstatus+=( "%F{$orange}↓%f" )
+
+    hook_com[misc]+=${(j:/:)gitstatus}
+}
+
+prompt_akhayyat_help(){
+  cat <<EOF
+akhayyat's prompt
+EOF
+}
+
+prompt_akhayyat_setup "$@"

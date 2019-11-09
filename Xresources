@@ -1,0 +1,14 @@
+emacs*font: dejavu sans mono-12:hintstyle=hintfull
+XTerm*faceName: dejavu sans mono-12
+XTerm*altSendsEscape: true
+XTerm*metaSendsEscape: true
+XTerm.termName: xterm-256color
+XTerm*color8:      #555555
+XTerm.VT100.geometry: 100x30
+XTerm*on2Clicks: regex [^/@ \n]+
+XTerm*on3Clicks: regex [^ \n]+
+XTerm*on4Clicks: regex [^#$]+
+XTerm*on5Clicks: line
+
+XTerm*VT100.translations: #override Shift <Btn1Up>: select-end(PRIMARY, CLIPBOARD, CUT_BUFFER0) \n\
+                                    Shift Ctrl <Key>V: insert-selection(CLIPBOARD)

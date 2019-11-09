@@ -1,0 +1,54 @@
+[ui]
+username = Ahmad Khayyat <akhayyat@gmail.com>
+interface = curses
+
+[extensions]
+graphlog =
+fetch =
+record =
+color =
+hgk =
+pager =
+mq =
+rebase =
+progress =
+prompt = ~/.dotfiles/hg/hg-prompt/prompt.py
+git =
+convert =
+purge =
+remotenames =
+churn =
+histedit =
+extdiff =
+
+[diff]
+git = True
+
+[merge-tools]
+emacs.args = -q --eval "(emerge-files-with-ancestor nil \"$local\" \"$other\" \"$base\" \"$output\" nil 'kill-emacs)"
+emacs.priority = 10
+kdiff3.args = $base $local $other -o $output
+kdiff3.gui = True
+kdiff3.priority = 20
+
+[pager]
+pager = LESS='FSRX' less
+quiet = True
+attend = annotate, cat, diff, export, glog, log, qdiff, help, incoming, outgoing, plog
+
+[mq]
+secret = True
+
+[extdiff]
+# Need to install wdiff and link `/usr/local/bin/cwdiff` to `hg/cwdiff`
+cmd.wdiff = ~/.dotfiles/hg/cwdiff
+opts.wdiff = --diff --ab
+
+[alias]
+upstream = !$HG summary --config paths.default=$(hg showconfig paths.upstream) --remote
+plog = glog --template '\033[0;32m{rev}\033[0m:{phase} \033[0;35m{author|person}\033[0m {desc|firstline|strip} \033[1;30m({date|age})\033[0m \033[0;33m{branches}\033[0m \033[38;5;166m{bookmarks}\033[0m \033[0;32m{tags}\033[0m \033[1;34m{remotenames}\033[0m\n\n'
+pout = out -G --template '\033[0;32m{rev}\033[0m:{phase} \033[0;35m{author|person}\033[0m {desc|firstline|strip} \033[1;30m({date|age})\033[0m \033[0;33m{branches}\033[0m \033[38;5;166m{bookmarks}\033[0m \033[0;32m{tags}\033[0m \033[1;34m{remotenames}\033[0m\n\n'
+pin = in -G --template '\033[0;32m{rev}\033[0m:{phase} \033[0;35m{author|person}\033[0m {desc|firstline|strip} \033[1;30m({date|age})\033[0m \033[0;33m{branches}\033[0m \033[38;5;166m{bookmarks}\033[0m \033[0;32m{tags}\033[0m \033[1;34m{remotenames}\033[0m\n\n'
+
+[subrepos]
+git:allowed = True

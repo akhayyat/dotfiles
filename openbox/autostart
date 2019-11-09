@@ -1,0 +1,83 @@
+# Add Arabic keyboard layout
+setxkbmap -option grp:shift_caps_toggle "us,ara(qwerty_digits)"
+
+# Fix rhe right Alt key
+xmodmap -e "keycode 108 = Alt_R"
+
+# Start repeating sooner after a key has been kept pressed
+xset r rate 300 30
+
+# Keep the screen on
+xset dpms 0 0 0
+xset s off
+
+# Disable slow keys
+xkbset -a
+
+# Set desktop background
+nitrogen --restore
+
+# System tray
+stalonetray --kludges force_icons_size &
+
+# Tray applications
+cameramonitor &
+parcellite -n &
+minbar &
+volti &
+skype &
+bluetooth-applet &
+#blueman-applet &
+
+# Desktop applications
+gkrellm &
+xterm &
+
+# Battery status
+
+[ ! -x /usr/bin/acpi ] && exit
+
+if [ "$(acpi 2>&1)" = "No support for device type: power_supply" ]
+then
+    exit
+fi
+
+#### Get screen resolution of the main screen
+xy=$(xrandr --current | awk '
+BEGIN {
+    found_main_screen = 0
+}
+/\+0\+0/ {
+    found_main_screen = 1
+}
+/\*/ {
+    split($1, xy, "x")
+    x = xy[1]
+    y = xy[2]
+    if (found_main_screen)
+        exit
+}
+END {
+    print x, y
+}')
+set $xy; x=$1; y=$2
+
+#### Display battery status
+w=64; h=14
+(
+    sleep 2 &&
+    while true
+    do
+        acpi | awk '
+BEGIN {
+  FS="[ :]"
+}
+{
+  if ($4 == "Discharging,")
+    print "- " $6 ":" $7
+  else if ($4 == "Charging,")
+    print "+ " $6 ":" $7
+  else print "Full"
+}'
+        sleep 30
+    done | dzen2 -x $((x-w)) -y $((y-h)) -w $w -fn '-*-terminus-medium-r-*-*-12-*-*-*-*-*-*-*' -bg "#474747" -fg "#b1c8d6" -e 'onstart=lower') &
