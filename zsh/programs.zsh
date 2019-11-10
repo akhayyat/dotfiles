@@ -29,8 +29,6 @@ fi
 
 # virtualenvwrapper
 export VIRTUAL_ENV_DISABLE_PROMPT=1
-if [ -r /etc/bash_completion.d/virtualenvwrapper ]; then
-    source /etc/bash_completion.d/virtualenvwrapper
 fi
 
 # pip
@@ -46,6 +44,8 @@ export PATH=$HOME/.rvm/bin:$PATH
 if [ -x $HOME/local/software/grails/bin/grails ]; then
    export GRAILS_HOME=$HOME/local/software/grails
    export PATH=$PATH:$GRAILS_HOME/bin
+if [ -r /usr/share/bash-completion/completions/virtualenvwrapper ]; then
+    source /usr/share/bash-completion/completions/virtualenvwrapper
 fi
 
 # Emacs
