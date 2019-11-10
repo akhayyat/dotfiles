@@ -6,6 +6,7 @@ source $ZSHROOT/syntax-highlighting.zsh
 source $ZSHROOT/history-substring-search.zsh
 source $ZSHROOT/editor.zsh
 source $ZSHROOT/directory.zsh
+source $ZSHROOT/path.zsh
 source $ZSHROOT/programs.zsh
 source $ZSHROOT/completion.zsh
 source $ZSHROOT/prompt.zsh
