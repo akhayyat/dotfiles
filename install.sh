@@ -95,8 +95,8 @@ update_hg_repo() {
     then
         hg clone $rev $repo $dir
     else
-        hg pull $rev
-        hg update $rev
+        hg -R $dir pull $rev
+        hg -R $dir update $rev
     fi
 }
 
@@ -109,7 +109,7 @@ update_git_repo() {
     then
         git clone $branch $repo $dir
     else
-        git pull --ff-only $repo $ref
+        git -C $dir pull --ff-only $repo $ref
     fi
 }
 
