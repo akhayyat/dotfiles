@@ -254,8 +254,7 @@
 ;; Package repositories
 (package-initialize)
 (add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/"))
-
+             '("melpa" . "https://melpa.org/packages/"))
 (load-theme 'zenburn t)
 
 ;; web-mode
