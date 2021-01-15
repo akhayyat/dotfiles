@@ -22,3 +22,8 @@ fi
 
 # rust
 export PATH=$HOME/.cargo/bin:$PATH
+
+# snap
+if [ -d /snap/bin ]; then
+    export PATH=$PATH:/snap/bin
+fi
