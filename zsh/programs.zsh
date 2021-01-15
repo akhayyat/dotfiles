@@ -66,3 +66,8 @@ if (( $+commands[lesspipe] )); then
     export LESSOPEN='| /usr/bin/env lesspipe %s 2>&-'
     alias pless='LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s" less '
 fi
+
+# broot: directory tree navigator
+if [ -r ~/.config/broot/launcher/bash/br ]; then
+    source ~/.config/broot/launcher/bash/br
+fi
