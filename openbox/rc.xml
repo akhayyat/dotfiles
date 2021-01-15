@@ -411,10 +411,17 @@
       <action name="PreviousWindow"/>
     </keybind>
     <keybind key="W-C-Tab">
-      <action name="NextWindow">
-        <panels>yes</panels>
-        <desktop>yes</desktop>
+      <action name="Execute">
+        <startupnotify>
+          <enabled>true</enabled>
+          <name>Rofi Window Switcher</name>
+        </startupnotify>
+        <command>rofi -show window</command>
       </action>
+      <!-- <action name="NextWindow"> -->
+      <!--   <panels>yes</panels> -->
+      <!--   <desktop>yes</desktop> -->
+      <!-- </action> -->
     </keybind>
     <keybind key="W-b">
       <action name="ToggleDecorations"/>
@@ -723,7 +730,16 @@
           <enabled>true</enabled>
           <name>Run Dialog</name>
         </startupnotify>
-        <command>gmrun</command>
+        <command>rofi -show drun</command>
+      </action>
+    </keybind>
+    <keybind key="W-C-r">
+      <action name="Execute">
+        <startupnotify>
+          <enabled>true</enabled>
+          <name>Run Dialog</name>
+        </startupnotify>
+        <command>rofi -show run</command>
       </action>
     </keybind>
     <keybind key="W-C-t">
