@@ -75,7 +75,6 @@
 ; allow both single and double quotes in the border
 (require 'org)
 (setf (nth 2 org-emphasis-regexp-components) " \t\r\n,")
-(custom-set-variables `(org-emphasis-alist ',org-emphasis-alist))
 
 ; define a new onlyenv environment with shortcut O
 (require 'ox-beamer)
@@ -245,7 +244,6 @@
 
 ;; Undo Tree
 ;;   http://www.dr-qubit.org/emacs.php#undo-tree
-(add-to-list 'load-path (expand-file-name "~/.dotfiles/emacs.d/undo-tree"))
 (require 'undo-tree)
 (global-undo-tree-mode)
 
