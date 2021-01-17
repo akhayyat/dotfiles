@@ -361,35 +361,23 @@
     </keybind>
     <keybind key="W-C-Right">
       <action name="ResizeRelative">
-        <right>5</right>
+        <right>50</right>
       </action>
     </keybind>
     <keybind key="W-C-Left">
       <action name="ResizeRelative">
-        <right>-5</right>
+        <right>-50</right>
       </action>
     </keybind>
     <keybind key="W-C-Up">
       <action name="ResizeRelative">
-        <bottom>-5</bottom>
+        <bottom>-50</bottom>
       </action>
     </keybind>
     <keybind key="W-C-Down">
       <action name="ResizeRelative">
-        <bottom>5</bottom>
+        <bottom>50</bottom>
       </action>
-    </keybind>
-    <keybind key="W-S-Left">
-      <action name="MoveToEdgeWest"/>
-    </keybind>
-    <keybind key="W-S-Right">
-      <action name="MoveToEdgeEast"/>
-    </keybind>
-    <keybind key="W-S-Up">
-      <action name="MoveToEdgeNorth"/>
-    </keybind>
-    <keybind key="W-S-Down">
-      <action name="MoveToEdgeSouth"/>
     </keybind>
     <keybind key="W-C-S-Left">
       <action name="GrowToEdgeWest"/>
@@ -402,6 +390,18 @@
     </keybind>
     <keybind key="W-C-S-Down">
       <action name="GrowToEdgeSouth"/>
+    </keybind>
+    <keybind key="W-S-Left">
+      <action name="MoveToEdgeWest"/>
+    </keybind>
+    <keybind key="W-S-Right">
+      <action name="MoveToEdgeEast"/>
+    </keybind>
+    <keybind key="W-S-Up">
+      <action name="MoveToEdgeNorth"/>
+    </keybind>
+    <keybind key="W-S-Down">
+      <action name="MoveToEdgeSouth"/>
     </keybind>
     <!-- Keybindings for window switching -->
     <keybind key="W-Tab">
