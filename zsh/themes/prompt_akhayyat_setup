@@ -40,8 +40,15 @@ function prompt_akhayyat_setup {
     zstyle ':vcs_info:git*+set-message:*' hooks git-untracked git-st
 
     # Define prompts.
+
+    # Prompt with Mercurial
+#     PROMPT="
+# %F{magenta}%n%f@%F{magenta}%m%f:%F{cyan}%~%f"'$(hg_prompt_1)${vcs_info_msg_0_}$(hg_prompt_2)$(virtualenv_prompt)$(rvm_prompt)
+# » '
+
+    # Prompt without Mercurial
     PROMPT="
-%F{magenta}%n%f@%F{magenta}%m%f:%F{cyan}%~%f"'$(hg_prompt_1)${vcs_info_msg_0_}$(hg_prompt_2)$(virtualenv_prompt)$(rvm_prompt)
+%F{magenta}%n%f@%F{magenta}%m%f:%F{cyan}%~%f"'${vcs_info_msg_0_}$(virtualenv_prompt)$(rvm_prompt)
 » '
 
     RPROMPT="%B%F{black}%D{%Y.%m.%d %a  %I:%M %P}%f%b"
