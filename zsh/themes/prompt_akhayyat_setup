@@ -42,29 +42,27 @@ function prompt_akhayyat_setup {
     # Define prompts.
 
     # Prompt with Mercurial
-#     PROMPT="
-# %F{magenta}%n%f@%F{magenta}%m%f:%F{cyan}%~%f"'$(hg_prompt_1)${vcs_info_msg_0_}$(hg_prompt_2)$(virtualenv_prompt)$(rvm_prompt)
-# » '
+    PROMPT="
+%F{magenta}%n%f@%F{magenta}%m%f:%F{cyan}%~%f"'$(hg_prompt_1)${vcs_info_msg_0_}$(hg_prompt_2)$(virtualenv_prompt)$(rvm_prompt)
+» '
 
     # Prompt without Mercurial
-    PROMPT="
-%F{magenta}%n%f@%F{magenta}%m%f:%F{cyan}%~%f"'${vcs_info_msg_0_}$(virtualenv_prompt)$(rvm_prompt)
-» '
+#     PROMPT="
+# %F{magenta}%n%f@%F{magenta}%m%f:%F{cyan}%~%f"'${vcs_info_msg_0_}$(virtualenv_prompt)$(rvm_prompt)
+# » '
 
     RPROMPT="%B%F{black}%D{%Y.%m.%d %a  %I:%M %P}%f%b"
 }
 
 function hg_prompt_1 {
     hg prompt --angle-brackets "\
- <on ☿<%F{cyan}<root|basename>%f/>%F{yellow}<branch>%f>\
+ on ☿<%F{cyan}<root|basename>%f/>%F{yellow}<branch>%f\
 <:%F{$orange}<bookmark>%f>\
  at %F{green}<rev>%f\
 <:%F{green}<tags>%f>\
 <%F{$orange}<status|modified>%f>\
 <%F{red}<status|unknown>%f>\
-<update>\
-< %F{yellow}↑%f:%F{yellow}<outgoing|count>%f>\
-< %F{$orange}↓%f:%F{$orange}<incoming|count>%f>" 2>/dev/null
+<update>" 2>/dev/null
 }
 
 function hg_prompt_2 {
@@ -80,9 +78,7 @@ pre_unapplied(%B%F{black})|post_unapplied(%f%b)>>" 2>/dev/null)
 <:%F{green}<tags>%f>\
 <%F{$orange}<status|modified>%f>\
 <%F{red}<status|unknown>%f>\
-<update>\
-< %F{yellow}↑%f<outgoing>>\
-< %F{$orange}↓%f<incoming>>" 2>/dev/null)
+<update>" 2>/dev/null)
     fi
 
     echo $mq
