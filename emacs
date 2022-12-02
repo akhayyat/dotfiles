@@ -246,6 +246,9 @@
 ;;   http://www.dr-qubit.org/emacs.php#undo-tree
 (require 'undo-tree)
 (global-undo-tree-mode)
+(setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo-tree-history")))
+(setq undo-tree-visualizer-diff t)
+(setq undo-tree-visualizer-timestamps t)
 
 ;;========================
 ;;  Third-Party Packages
