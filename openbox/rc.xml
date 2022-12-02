@@ -569,6 +569,15 @@
           <command>firefox -P k -new-instance</command>
         </action>
       </keybind>
+      <keybind key="t">
+        <action name="Execute">
+          <startupnotify>
+            <enabled>true</enabled>
+            <name>Firefox (alt profile)</name>
+          </startupnotify>
+          <command>firefox -P t -new-instance</command>
+        </action>
+      </keybind>
     </keybind>
     <keybind key="W-C-S-w">
       <keybind key="1">
